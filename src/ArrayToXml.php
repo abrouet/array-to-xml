@@ -38,7 +38,7 @@ class ArrayToXml
     {
         $this->document = new DOMDocument($xmlVersion, $xmlEncoding);
         $this->replaceSpacesByUnderScoresInKeyNames = $replaceSpacesByUnderScoresInKeyNames;
-        $this->document->formatOutput = $formatCode;
+        $this->document->formatOutput = $formatCode; //Beautify the code
         if ($this->isArrayAllKeySequential($array) && ! empty($array)) {
             throw new DOMException('Invalid Character Error');
         }
