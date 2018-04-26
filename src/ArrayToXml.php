@@ -36,6 +36,7 @@ class ArrayToXml
     public function __construct(array $array, $rootElement = '', $replaceSpacesByUnderScoresInKeyNames = true, $xmlEncoding = null, $xmlVersion = '1.0')
     {
         $this->document = new DOMDocument($xmlVersion, $xmlEncoding);
+        $this->document->formatOutput = true; //beautify the code
         $this->replaceSpacesByUnderScoresInKeyNames = $replaceSpacesByUnderScoresInKeyNames;
 
         if ($this->isArrayAllKeySequential($array) && ! empty($array)) {
