@@ -30,15 +30,15 @@ class ArrayToXml
      * @param bool $replaceSpacesByUnderScoresInKeyNames
      * @param string $xmlEncoding
      * @param string $xmlVersion
+     * @param bool $formatCode
      *
      * @throws DOMException
      */
-    public function __construct(array $array, $rootElement = '', $replaceSpacesByUnderScoresInKeyNames = true, $xmlEncoding = null, $xmlVersion = '1.0')
+    public function __construct(array $array, $rootElement = '', $replaceSpacesByUnderScoresInKeyNames = true, $xmlEncoding = null, $xmlVersion = '1.0', $formatCode = true)
     {
         $this->document = new DOMDocument($xmlVersion, $xmlEncoding);
-        $this->document->formatOutput = true; //beautify the code
         $this->replaceSpacesByUnderScoresInKeyNames = $replaceSpacesByUnderScoresInKeyNames;
-
+        $this->document->formatOutput = $formatCode;
         if ($this->isArrayAllKeySequential($array) && ! empty($array)) {
             throw new DOMException('Invalid Character Error');
         }
@@ -58,12 +58,13 @@ class ArrayToXml
      * @param bool $replaceSpacesByUnderScoresInKeyNames
      * @param string $xmlEncoding
      * @param string $xmlVersion
+     * @param bool $formatCode
      *
      * @return string
      */
-    public static function convert(array $array, $rootElementName = '', $replaceSpacesByUnderScoresInKeyNames = true, $xmlEncoding = null, $xmlVersion = '1.0')
+    public static function convert(array $array, $rootElementName = '', $replaceSpacesByUnderScoresInKeyNames = true, $xmlEncoding = null, $xmlVersion = '1.0', $formatCode = true)
     {
-        $converter = new static($array, $rootElementName, $replaceSpacesByUnderScoresInKeyNames, $xmlEncoding, $xmlVersion);
+        $converter = new static($array, $rootElementName, $replaceSpacesByUnderScoresInKeyNames, $xmlEncoding, $xmlVersion, $formatCode);
 
         return $converter->toXml();
     }
